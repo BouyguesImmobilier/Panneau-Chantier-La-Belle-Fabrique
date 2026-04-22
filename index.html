@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panneau de chantier</title>
+
+  <style>
+    :root {
+      --blue: #003b49;
+      --blue-light: #0d5562;
+      --green: #97c21f;
+      --green-dark: #7ea518;
+      --bg: #f4f7f8;
+      --card: #ffffff;
+      --text: #1f1f1f;
+      --muted: #5f6b70;
+      --line: #e3e8ea;
+      --soft: #f9fbfb;
+      --shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+      --radius: 16px;
+      --table-radius: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #eef2f3, var(--bg));
+      color: var(--text);
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--blue), var(--blue-light));
+      color: white;
+      padding: 34px 20px 30px;
+      text-align: center;
+    }
+
+    .logo {
+      height: 78px;
+      margin-bottom: 16px;
+      border-radius: 8px;
+      max-width: 100%;
+    }
+
+    header h1 {
+      margin: 10px 0 12px;
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      line-height: 1.2;
+    }
+
+    .subtitle {
+      color: white;
+      text-align: center;
+      font-weight: 500;
+      font-size: 1rem;
+      margin: 0;
+      opacity: 0.95;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 28px auto;
+      padding: 0 18px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 28px;
+      margin-bottom: 28px;
+      border: 1px solid #edf1f2;
+    }
+
+    h2 {
+      color: var(--blue);
+      text-align: center;
+      margin: 0 0 8px;
+      font-size: 1.65rem;
+    }
+
+    .underline {
+      width: 64px;
+      height: 4px;
+      background: var(--green);
+      margin: 0 auto 22px;
+      border-radius: 999px;
+    }
+
+    p {
+      line-height: 1.75;
+      color: #40484b;
+      text-align: justify;
+      margin: 0 0 16px;
+    }
+
+    .section-block {
+      margin-top: 18px;
+      padding: 22px;
+      background: var(--soft);
+      border: 2px solid var(--line);
+      border-radius: 16px;
+    }
+
+    .section-block + .section-block {
+      margin-top: 26px;
+    }
+
+    .section-label {
+      display: inline-block;
+      background: var(--blue);
+      color: white;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-size: 0.94rem;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      margin-bottom: 18px;
+    }
+
+    .section-intro {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      text-align: left;
+    }
+
+    .table-shell {
+      background: #f9fbfb;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 10px;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      min-width: 760px;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: var(--table-radius);
+      overflow: hidden;
+      table-layout: fixed;
+    }
+
+    thead th {
+      background: var(--green);
+      color: var(--blue);
+      padding: 14px 16px;
+      text-align: left;
+      font-size: 0.96rem;
+      font-weight: 700;
+      border-bottom: 2px solid #88b11d;
+      border-right: 1px solid var(--line);
+    }
+
+    thead th:last-child {
+      border-right: none;
+    }
+
+    tbody td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+      border-right: 1px solid var(--line);
+      vertical-align: top;
+      font-size: 0.96rem;
+    }
+
+    tbody td:last-child {
+      border-right: none;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    tbody tr:nth-child(even) {
+      background: #fbfcfc;
+    }
+
+    tbody tr:hover {
+      background: #f1f7e6;
+      transition: background 0.2s ease;
+    }
+
+    thead th:nth-child(1),
+    tbody td:nth-child(1) {
+      width: 30%;
+    }
+
+    thead th:nth-child(2),
+    tbody td:nth-child(2) {
+      width: 30%;
+    }
+
+    thead th:nth-child(3),
+    tbody td:nth-child(3) {
+      width: 40%;
+    }
+
+    tbody td:first-child {
+      font-weight: 700;
+      color: var(--blue);
+    }
+
+    tbody td:nth-child(3) {
+      color: var(--muted);
+    }
+
+    .four-cols thead th:nth-child(1),
+    .four-cols tbody td:nth-child(1) {
+      width: 24%;
+    }
+
+    .four-cols thead th:nth-child(2),
+    .four-cols tbody td:nth-child(2) {
+      width: 24%;
+    }
+
+    .four-cols thead th:nth-child(3),
+    .four-cols tbody td:nth-child(3) {
+      width: 26%;
+      color: inherit;
+    }
+
+    .four-cols thead th:nth-child(4),
+    .four-cols tbody td:nth-child(4) {
+      width: 26%;
+      color: var(--muted);
+    }
+
+    footer {
+      text-align: center;
+      padding: 10px 20px 28px;
+      color: #667276;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 28px 16px 24px;
+      }
+
+      .logo {
+        height: 60px;
+      }
+
+      .subtitle {
+        font-size: 0.95rem;
+        line-height: 1.5;
+      }
+
+      .container {
+        padding: 0 12px;
+        margin: 18px auto;
+      }
+
+      .card {
+        padding: 20px 16px;
+        border-radius: 14px;
+      }
+
+      .section-block {
+        padding: 16px;
+      }
+
+      h2 {
+        font-size: 1.3rem;
+      }
+
+      p {
+        text-align: left;
+        font-size: 0.97rem;
+      }
+
+      .table-shell {
+        padding: 8px;
+      }
+
+      table {
+        min-width: 760px;
+      }
+
+      thead th,
+      tbody td {
+        padding: 12px 12px;
+        font-size: 0.92rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 1.55rem;
+      }
+
+      .logo {
+        height: 54px;
+      }
+
+      .card {
+        padding: 18px 14px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <img class="logo" src="logo.jpg" alt="Bouygues Immobilier">
+  <h1>La Belle Fabrique</h1>
+  <p class="subtitle">RUE DU MARECHAL LEFEBVRE, 67100 STRASBOURG</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+    <h2>Présentation du projet</h2>
+    <div class="underline"></div>
+
+    <p>
+      Bouygues Immobilier réalise une opération immobilière située au
+      <strong>Rue du Maréchal Lefebvre à Strasbourg (67100)</strong>,
+      consistant en un ensemble immobilier comprenant <strong>184 logements</strong>.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>Maîtrise d’œuvre et bureaux d’études</h2>
+    <div class="underline"></div>
+
+    <div class="section-block">
+      <div class="section-label">MAÎTRISE D’ŒUVRE</div>
+      <p class="section-intro">
+        Les missions de maîtrise d’œuvre du chantier sont réparties selon les domaines suivants.
+      </p>
+
+      <div class="table-shell">
+        <table>
+          <thead>
+            <tr>
+              <th>Mission</th>
+              <th>Entreprise</th>
+              <th>Adresse</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Architecte</td>
+              <td>BIK Architecture</td>
+              <td>Espace Plein Ciel, 5 Allée de l’Europe, 67960 Entzheim</td>
+            </tr>
+            <tr>
+              <td>Maîtrise d’Œuvre d’Exécution "Bâtiment"</td>
+              <td>AMC</td>
+              <td>Bâtiment Mikado, 8 Rue de la Haye, 67300 Schiltigheim</td>
+            </tr>
+            <tr>
+              <td>Maîtrise d’Œuvre d’Exécution "VRD bâtiments et aménageur"</td>
+              <td>Lollier Ingénierie</td>
+              <td>21 Rue Jacobi Netter, 67200 Strasbourg</td>
+            </tr>
+            <tr>
+              <td>Maîtrise d’Œuvre d’Exécution "Désamiantage-Déconstruction"</td>
+              <td>AMIUM CONSEIL</td>
+              <td>18 Rue de Bischheim, 67300 Schiltigheim</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-label">BUREAUX D’ÉTUDES</div>
+      <p class="section-intro">
+        Les bureaux d’études techniques intervenant sur l’opération sont présentés ci-dessous.
+      </p>
+
+      <div class="table-shell">
+        <table>
+          <thead>
+            <tr>
+              <th>Domaine</th>
+              <th>Entreprise</th>
+              <th>Adresse</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Fluides, thermique &amp; AMO environnement</td>
+              <td>ELAN</td>
+              <td>30 Avenue du Rhin, 67100 Strasbourg</td>
+            </tr>
+            <tr>
+              <td>Structures</td>
+              <td>HN Ingénierie</td>
+              <td>16b Rue de l’Électricité, 67800 Hoenheim</td>
+            </tr>
+            <tr>
+              <td>BET VRD</td>
+              <td>Lollier Ingénierie</td>
+              <td>3 Rue de Mittelhausen, 67170 Mittelschaeffolsheim</td>
+            </tr>
+            <tr>
+              <td>Économiste de la construction</td>
+              <td>BIK Architecture</td>
+              <td>5 Allée de l’Europe, 67960 Entzheim</td>
+            </tr>
+            <tr>
+              <td>Paysagiste</td>
+              <td>LINDER Paysages</td>
+              <td>2 Rue des Veaux, 67000 Strasbourg</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-label">BUREAU DE CONTRÔLE</div>
+      <p class="section-intro">
+        Le bureau de contrôle est présenté ci-dessous.
+      </p>
+
+      <div class="table-shell">
+        <table>
+          <thead>
+            <tr>
+              <th>Intervenant</th>
+              <th>Entreprise</th>
+              <th>Adresse</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Bureau de contrôle</td>
+              <td>GROUPE QUALICONSULT</td>
+              <td>19 Rue des Cigognes, 67960 Entzheim</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Entreprises intervenantes</h2>
+    <div class="underline"></div>
+
+    <div class="table-shell">
+      <table>
+        <thead>
+          <tr>
+            <th>Lot</th>
+            <th>Entreprise</th>
+            <th>Localisation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Terrassement et VRD</td><td>DENNI LEGOLL</td><td>61 Route de Rosheim, 67870 Griesheim-près-Molsheim</td></tr>
+          <tr><td>Gros œuvre</td><td>SOCARA</td><td>2 Rue Melina Mercouri, Carré d’O, 67380 Lingolsheim</td></tr>
+          <tr><td>Plomberie</td><td>BEYER SAS</td><td>70 Avenue de Strasbourg, 67170 Brumath</td></tr>
+          <tr><td>Électricité</td><td>EIFFAGE ÉNERGIE SYSTÈMES</td><td>1 Rue Pierre et Marie Curie, 67540 Ostwald</td></tr>
+          <tr><td>VMC et chauffage</td><td>POLYTHERM</td><td>10 Rue de l’Atome, 67800 Bischheim</td></tr>
+          <tr><td>Menuiseries extérieures</td><td>ACTEA</td><td>P.A. Les Coteaux de la Mossig, 67310 Wasselonne</td></tr>
+          <tr><td>Menuiseries intérieures</td><td>BEYER MENUISERIE</td><td>ZI – Rue Ettore Bugatti, 67150 Erstein</td></tr>
+          <tr><td>Ascenseur</td><td>SCHINDLER</td><td>5 Rue Dewoitine, 78140 Vélizy-Villacoublay</td></tr>
+          <tr><td>Étanchéité</td><td>Non attribué à ce jour</td><td>-</td></tr>
+          <tr><td>Plâtrerie</td><td>Non attribué à ce jour</td><td>-</td></tr>
+          <tr><td>Sols</td><td>Non attribué à ce jour</td><td>-</td></tr>
+          <tr><td>Peinture</td><td>Non attribué à ce jour</td><td>-</td></tr>
+          <tr><td>Charpente</td><td>Non attribué à ce jour</td><td>-</td></tr>
+          <tr><td>Serrurerie</td><td>Non attribué à ce jour</td><td>-</td></tr>
+          <tr><td>Ravalement</td><td>Non attribué à ce jour</td><td>-</td></tr>
+          <tr><td>Espaces verts</td><td>Non attribué à ce jour</td><td>-</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Sous-traitants</h2>
+    <div class="underline"></div>
+
+    <p class="section-intro">
+      Les sous-traitants présents sur le chantier ainsi que l’entreprise principale pour laquelle ils interviennent.
+    </p>
+
+    <div class="table-shell">
+      <table class="four-cols">
+        <thead>
+          <tr>
+            <th>Lot / activité</th>
+            <th>Sous-traitant</th>
+            <th>Entreprise principale</th>
+            <th>Localisation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Gros œuvre</td>
+            <td>KELLER</td>
+            <td>SOCARA</td>
+            <td>Non attribué à ce jour</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  Bouygues Immobilier
+</footer>
+
+</body>
+</html>
